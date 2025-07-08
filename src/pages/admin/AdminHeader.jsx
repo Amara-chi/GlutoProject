@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Home, Package, ShoppingCart, Users, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const AdminHeader = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => setIsOpen(!isOpen);

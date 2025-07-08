@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -8,13 +9,32 @@ const Catalog = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [openCategory, setOpenCategory] = useState(null);
 
+  const toggleCategory = (id) => {
+    setOpenCategory(prev => (prev === id ? null : id));
+  };
+
+  const handleSubcategoryChange = (subcategory) => {
+    setSelectedSubcategory(subcategory);
+    setSelectedCategory('');
+    setCurrentPage(1);
+  };
+  
   useEffect(() => {
-    fetchCategories();
-    fetchProducts();
-  }, [selectedCategory, searchTerm, currentPage]);
+    fetchCategories(); // only once
+  }, []);
+  
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      fetchProducts();
+    }, 500);
+  
+    return () => clearTimeout(delay);
+  }, [selectedCategory, selectedSubcategory, searchTerm, currentPage]);  
 
   const fetchCategories = async () => {
     try {
@@ -35,7 +55,9 @@ const Catalog = () => {
       });
       
       if (selectedCategory) params.append('category', selectedCategory);
+      if (selectedSubcategory) params.append('subcategory', selectedSubcategory);
       if (searchTerm) params.append('search', searchTerm);
+
 
       const response = await fetch(`/api/products?${params}`);
       const data = await response.json();
@@ -51,13 +73,13 @@ const Catalog = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setCurrentPage(1);
-    fetchProducts();
   };
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
+    setSelectedSubcategory('');
     setCurrentPage(1);
-  };
+  };  
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -109,28 +131,55 @@ const Catalog = () => {
                 Categories
               </h3>
               <div className="space-y-2">
-                <button
-                  onClick={() => handleCategoryChange('')}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                    selectedCategory === '' 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  All Categories
-                </button>
+              <button
+                onClick={() => handleCategoryChange('')}
+                className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                  selectedCategory === '' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                },
+                ${
+                  selectedSubcategory === '' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                All Categories
+              </button>
                 {categories.map((category) => (
-                  <button
-                    key={category._id}
-                    onClick={() => handleCategoryChange(category._id)}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                      selectedCategory === category._id 
-                        ? 'bg-blue-600 text-white' 
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
-                  >
-                    {category.name}
-                  </button>
+                  <div key={category._id}>
+                    {/* Category Dropdown Header */}
+                    <button
+                      onClick={() => toggleCategory(category._id)}
+                      className="w-full flex items-center justify-between px-3 py-2 rounded-lg 
+                                text-left transition-colors text-gray-700 dark:text-gray-300 
+                                hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      <span>{category.name}</span>
+                      {openCategory === category._id ? (
+                        <ChevronDown className="w-4 h-4" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4" />
+                      )}
+                    </button>
+
+                    {/* Subcategories (dropdown content) */}
+                    {openCategory === category._id && category.subcategories?.length > 0 && (
+                      <div className="ml-4 mt-1 space-y-1">
+                        {category.subcategories.map((sub, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleSubcategoryChange(sub)}
+                            className="w-full text-left px-3 py-1 text-sm rounded-md 
+                                      text-gray-600 dark:text-gray-300 hover:bg-blue-100 
+                                      dark:hover:bg-blue-900"
+                          >
+                            {sub}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>

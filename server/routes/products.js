@@ -8,16 +8,20 @@ const router = express.Router();
 // Get all products (public)
 router.get('/', async (req, res) => {
   try {
-    const { category, search, page = 1, limit = 12 } = req.query;
+    const { category, subcategory, search, page = 1, limit = 12 } = req.query;
     const query = { isActive: true };
 
     if (category) {
       query.category = category;
     }
-
+    
+    if (subcategory) {
+      query.subcategory = subcategory;
+    }
+    
     if (search) {
       query.$text = { $search: search };
-    }
+    }    
 
     const products = await Product.find(query)
       .populate('category', 'name')
