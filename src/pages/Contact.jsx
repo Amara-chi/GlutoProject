@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
@@ -45,21 +46,21 @@ const Contact = () => {
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <Mail className="h-6 w-6 text-blue-600" />
+                  <Mail className="h-6 w-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Email</p>
                     <p className="text-gray-600 dark:text-gray-400">info@glutointernational.com</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="h-6 w-6 text-blue-600" />
+                  <Phone className="h-6 w-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Phone</p>
                     <p className="text-gray-600 dark:text-gray-400">+1 (555) 123-4567</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="h-6 w-6 text-blue-600" />
+                  <MapPin className="h-6 w-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Address</p>
                     <p className="text-gray-600 dark:text-gray-400">
@@ -70,7 +71,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Clock className="h-6 w-6 text-blue-600" />
+                  <Clock className="h-6 w-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Business Hours</p>
                     <p className="text-gray-600 dark:text-gray-400">
@@ -113,7 +114,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               <div>
@@ -126,7 +127,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               <div>
@@ -138,7 +139,7 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               <div>
@@ -151,13 +152,13 @@ const Contact = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   placeholder="Tell us about your requirements..."
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
+                className="w-full bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
               >
                 Send Message
               </button>

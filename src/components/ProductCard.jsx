@@ -2,15 +2,19 @@ import React from 'react';
 import { ShoppingCart, Package, Clock, Calendar } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onClick, buttonColor = 'blue' }) => {
   const { addToCart } = useCart();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
     addToCart(product);
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div 
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+      onClick={onClick}
+    >
       <div className="relative">
         <img 
           src={product.image} 
@@ -79,7 +83,11 @@ const ProductCard = ({ product }) => {
           </span>
           <button
             onClick={handleAddToCart}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200"
+            className={`${
+              buttonColor === 'yellow' 
+                ? 'bg-yellow-500 hover:bg-yellow-600' 
+                : 'bg-blue-600 hover:bg-blue-700'
+            } text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200`}
           >
             <ShoppingCart className="h-4 w-4" />
             <span>Add to Cart</span>

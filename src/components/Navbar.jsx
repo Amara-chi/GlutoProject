@@ -26,10 +26,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Package className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
-              GLUTO
-            </span>
+            
+            
+            <img 
+                src="../src/assets/Gluto Logo w stoke.png" 
+                alt="GLUTO International Logo" 
+                className="h-10 w-auto hover:scale-105 transition-transform"
+              />
           </Link>
 
           {/* Desktop Navigation */}
