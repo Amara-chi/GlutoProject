@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, X } from 'lucide-react';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/ProductCard'; // Add this import
+import ProductModal from '../components/ProductModal'; // Add if using modal
+import BackToTop from '../components/BackToTop'; // Add if using back-to-top
+;
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const Catalog = () => {
@@ -9,6 +12,10 @@ const Catalog = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState(null);
+    const [showFilters, setShowFilters] = useState(false); // Add this line!
+  const [priceRange, setPriceRange] = useState([0, 1000]); // Added missing state
+  const [sortOption, setSortOption] = useState(''); // Added missing state
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
