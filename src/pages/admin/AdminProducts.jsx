@@ -257,7 +257,7 @@ const AdminProducts = () => {
                 </p>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-lg font-bold text-blue-600">
-                    ₦{product.price.toFixed(2)}
+                    ${product.price.toFixed(2)}
                   </span>
                   <span className="text-sm text-gray-500">
                     {product.category?.name}

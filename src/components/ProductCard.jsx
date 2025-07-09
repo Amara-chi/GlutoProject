@@ -79,7 +79,7 @@ const ProductCard = ({ product, onClick, buttonColor = 'blue' }) => {
         {/* Price and Add to Cart */}
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-              ₦{product.price}
+            ${product.price}
           </span>
           <button
             onClick={handleAddToCart}
