@@ -143,8 +143,8 @@ const Catalog = () => {
                   onClick={() => handleCategoryChange('')}
                   className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                     selectedCategory === '' 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      ? 'bg-primary-600 text-white' 
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-primary-600 dark:hover:bg-gray-700'
                   }`}
                 >
                   All Categories

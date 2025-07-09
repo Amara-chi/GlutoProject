@@ -43,8 +43,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   isActive(link.path)
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                    ? 'text-primary-600 dark:text-primary-600'
+                    : 'text- dark:text-gray-300 hover:underline decoration-4 decoration-primary-600 dark:hover:underline '
                 }`}
               >
                 {link.label}
