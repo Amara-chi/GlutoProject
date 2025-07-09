@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, X } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import BackToTop from '../components/BackToTop';
-import ProductModal from '../components/ProductModal';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -10,17 +9,14 @@ const Catalog = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showFilters, setShowFilters] = useState(false);
-  const [priceRange, setPriceRange] = useState([0, 1000]);
-  const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
     fetchCategories();
     fetchProducts();
-  }, [selectedCategory, searchTerm, currentPage, priceRange, sortOption]);
+  }, [selectedCategory, searchTerm, currentPage]);
 
   const fetchCategories = async () => {
     try {
@@ -41,10 +37,8 @@ const Catalog = () => {
       });
       
       if (selectedCategory) params.append('category', selectedCategory);
+      if (selectedSubcategory) params.append('subcategory', selectedSubcategory);
       if (searchTerm) params.append('search', searchTerm);
-      if (priceRange[0] > 0) params.append('minPrice', priceRange[0]);
-      if (priceRange[1] < 1000) params.append('maxPrice', priceRange[1]);
-      if (sortOption) params.append('sort', sortOption);
 
       const response = await fetch(`/api/products?${params}`);
       const data = await response.json();
@@ -60,13 +54,13 @@ const Catalog = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setCurrentPage(1);
-    fetchProducts();
   };
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
+    setSelectedSubcategory('');
     setCurrentPage(1);
-  };
+  };  
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -142,7 +136,7 @@ const Catalog = () => {
                   onClick={() => handleCategoryChange('')}
                   className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                     selectedCategory === '' 
-                      ? 'bg-primary-600 text-white' 
+                      ? 'bg-blue-600 text-white' 
                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 >
@@ -154,7 +148,7 @@ const Catalog = () => {
                     onClick={() => handleCategoryChange(category._id)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                       selectedCategory === category._id 
-                        ? 'bg-primary-600 text-white' 
+                        ? 'bg-blue-600 text-white' 
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >

@@ -5,6 +5,7 @@ import AdminHeader from './AdminHeader';
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [filteredSubCategories, setFilteredSubCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -33,6 +34,24 @@ const AdminProducts = () => {
     fetchProducts();
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    if (formData.category) {
+      const selectedCategory = categories.find(c => c._id === formData.category);
+      if (selectedCategory) {
+        const formattedSubs = selectedCategory.subcategories.map(sub => ({
+          _id: sub,
+          name: sub
+        }));
+        setFilteredSubCategories(formattedSubs);
+      } else {
+        setFilteredSubCategories([]);
+      }
+      setFormData(prev => ({ ...prev, subcategory: '' }));
+    } else {
+      setFilteredSubCategories([]);
+    }
+  }, [formData.category, categories]);
 
   const fetchProducts = async () => {
     try {
@@ -110,6 +129,15 @@ const AdminProducts = () => {
       leadTime: product.leadTime || '',
       shelfLife: product.shelfLife || ''
     });
+    
+    const selectedCategory = categories.find(c => c._id === product.category._id);
+    if (selectedCategory) {
+      const formattedSubs = selectedCategory.subcategories.map(sub => ({
+        _id: sub,
+        name: sub
+      }));
+      setFilteredSubCategories(formattedSubs);
+    }
     setShowModal(true);
   };
 
@@ -175,7 +203,6 @@ const AdminProducts = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
       <AdminHeader />
       <div className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -200,7 +227,6 @@ const AdminProducts = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Search */}
         <div className="mb-6">
           <div className="relative">
             <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -214,7 +240,6 @@ const AdminProducts = () => {
           </div>
         </div>
 
-        {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
             <div key={product._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
@@ -232,7 +257,7 @@ const AdminProducts = () => {
                 </p>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-lg font-bold text-blue-600">
-                    ${product.price.toFixed(2)}
+                    ₦{product.price.toFixed(2)}
                   </span>
                   <span className="text-sm text-gray-500">
                     {product.category?.name}
@@ -272,7 +297,6 @@ const AdminProducts = () => {
         )}
       </div>
 
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
@@ -344,18 +368,28 @@ const AdminProducts = () => {
                       ))}
                     </select>
                   </div>
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Availability (%)
+                      Subcategory
                     </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      value={formData.availability}
-                      onChange={(e) => setFormData({...formData, availability: e.target.value})}
+                    <select
+                      value={formData.subcategory}
+                      onChange={(e) => setFormData({...formData, subcategory: e.target.value})}
+                      required
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                    />
+                      disabled={!formData.category}
+                    >
+                      <option value="">Select Subcategory</option>
+                      {filteredSubCategories.length === 0 && formData.category && (
+                        <option value="" disabled>No subcategories available</option>
+                      )}
+                      {filteredSubCategories.map(sub => (
+                        <option key={sub._id} value={sub._id}>
+                          {sub.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -399,11 +433,15 @@ const AdminProducts = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subcategory</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Availability (%)
+                    </label>
                     <input
-                      type="text"
-                      value={formData.subcategory}
-                      onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={formData.availability}
+                      onChange={(e) => setFormData({...formData, availability: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                     />
                   </div>
@@ -428,7 +466,6 @@ const AdminProducts = () => {
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                     />
                   </div>
-             
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Origin</label>
                     <input
@@ -496,7 +533,6 @@ const AdminProducts = () => {
                     />
                   </div>
                 </div>
-
 
                 <div className="flex justify-end space-x-3">
                   <button
