@@ -26,10 +26,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Package className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
-              GLUTO
-            </span>
+            
+            
+            <img 
+                src="../src/assets/Gluto Logo w stoke.png" 
+                alt="GLUTO International Logo" 
+                className="h-10 w-auto hover:scale-105 transition-transform"
+              />
           </Link>
 
           {/* Desktop Navigation */}
@@ -40,8 +43,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   isActive(link.path)
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                    ? 'text-primary-600 dark:text-primary-600'
+                    : 'text- dark:text-gray-300 hover:underline decoration-4 decoration-primary-600 dark:hover:underline '
                 }`}
               >
                 {link.label}

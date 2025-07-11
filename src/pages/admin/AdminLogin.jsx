@@ -53,7 +53,11 @@ const AdminLogin = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <Package className="h-12 w-12 text-blue-600" />
+          <img 
+                src="../src/assets/Gluto Logo w stoke.png" 
+                alt="GLUTO International Logo" 
+                className="h-10 w-auto hover:scale-105 transition-transform"
+              />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
             {isLogin ? 'Admin Login' : 'Admin Registration'}
@@ -77,7 +81,7 @@ const AdminLogin = () => {
                   required={!isLogin}
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 sm:text-sm"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -94,7 +98,7 @@ const AdminLogin = () => {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 sm:text-sm"
                 placeholder="Enter your email"
               />
             </div>
@@ -111,7 +115,7 @@ const AdminLogin = () => {
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 sm:text-sm"
                   placeholder="Enter your password"
                 />
                 <button
@@ -139,7 +143,7 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
             </button>
@@ -149,7 +153,7 @@ const AdminLogin = () => {
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
+              className="text-primary-600 hover:text-yellow-600 dark:primary-600 dark:hover:text-yellow-600 text-sm"
             >
               {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
             </button>
