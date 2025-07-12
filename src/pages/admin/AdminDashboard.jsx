@@ -67,33 +67,36 @@ const AdminDashboard = () => {
       {/* Header */}
       <AdminHeader />
       <div className="bg-white dark:bg-gray-800 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Admin Dashboard
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Welcome back, {user?.name}!
-              </p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              >
-                View Site
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 sm:py-6 gap-4 sm:gap-0">
+      {/* Left side - Title and greeting */}
+      <div className="order-1 sm:order-none">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+          Admin Dashboard
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+          Welcome back, {user?.name}!
+        </p>
       </div>
+
+      {/* Right side - Links and buttons */}
+      <div className="flex flex-col xs:flex-row items-start xs:items-center gap-3 sm:gap-4 w-full sm:w-auto order-2 sm:order-none">
+        <Link
+          to="/"
+          className="text-sm sm:text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white w-full xs:w-auto text-center xs:text-left px-3 py-1.5 sm:px-0 sm:py-0 border border-gray-200 dark:border-gray-700 rounded sm:border-none"
+        >
+          View Site
+        </Link>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm sm:text-base w-full xs:w-auto text-center"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}

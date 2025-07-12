@@ -124,7 +124,7 @@ const Catalog = () => {
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
-          <div className="hidden lg:block lg:w-64 space-y-6">
+          <div className=" lg:block lg:w-64 space-y-6">
             {/* Search */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
