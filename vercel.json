@@ -28,8 +28,8 @@
   ],
   "env": {
     "NODE_ENV": "production",
-    "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
-    "CLOUDINARY_API_KEY": "@cloudinary_api_key",
-    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret"
+    "CLOUDINARY_CLOUD_NAME": "ddzfagpvt",
+    "CLOUDINARY_API_KEY": "J98WuHHV3rhFY5Se5UK4DqydcLE",
+    "CLOUDINARY_API_SECRET": "your_api_secret"
   }
 }
