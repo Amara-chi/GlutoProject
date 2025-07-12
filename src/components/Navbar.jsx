@@ -44,7 +44,7 @@ const Navbar = () => {
                 className={`text-sm font-medium transition-colors duration-200 ${
                   isActive(link.path)
                     ? 'text-primary-600 dark:text-primary-600'
-                    : 'text- dark:text-gray-300 hover:underline decoration-4 decoration-primary-600 dark:hover:underline '
+                    : 'text-gray dark:text-gray-300 hover:underline decoration-4 decoration-primary-600 dark:hover:underline '
                 }`}
               >
                 {link.label}
@@ -103,8 +103,8 @@ const Navbar = () => {
                   to={link.path}
                   className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
                     isActive(link.path)
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'text-primary-600 dark:text-primary-600 '
+                      : 'text-gray dark:text-gray-300 hover:underline decoration-4 decoration-primary-600 dark:hover:underline'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
