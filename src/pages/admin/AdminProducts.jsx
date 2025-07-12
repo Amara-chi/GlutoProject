@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Search, Package } from 'lucide-react';
 import AdminHeader from './AdminHeader';
-import { getOptimizedImageUrl } from '../utils/cloudinary';
+import { getOptimizedImageUrl } from '../../utils/cloudinary';
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
