@@ -155,8 +155,8 @@ const Catalog = () => {
                     onClick={() => handleCategoryChange(category._id)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                       selectedCategory === category._id 
-                        ? 'bg-blue-600 text-white' 
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        ? 'bg-primary-600 text-white' 
+                        : 'text-gray-700 dark:text-gray-300  hover:bg-primary-600 dark:hover:bg-gray-700'
                     }`}
                   >
                     {category.name}
