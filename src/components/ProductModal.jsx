@@ -48,23 +48,23 @@ const ProductModal = ({ product, onClose, buttonColor = 'blue' }) => {
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Details:</h4>
                   <ul className="text-gray-600 dark:text-gray-300 space-y-1">
                     <li>• Category: {product.category?.name || 'N/A'}</li>
-                    <li className='flex gap-1'>• Product Weight: {product.weight && (
+                    <li className='flex gap-1'>• Weight: {product.weight && (
                                 <div className=" text-md text-gray-600 dark:text-gray-400">
                                   {product.weight}
                                 </div>
                               )}</li>
-                    <li className='flex gap-1'>• Product Leadtime: {product.leadTime && (
+                    <li className='flex gap-1'>• Leadtime: {product.leadTime && (
                                 <div className=" text-md text-gray-600 dark:text-gray-400">
                                   {product.leadTime}
                                 </div>
                               )}</li>
-                    <li className='flex gap-1'>• Product Shelflife: {product.shelfLife && (
+                    <li className='flex gap-1'>• Shelflife: {product.shelfLife && (
                                 <div className=" text-md text-gray-600 dark:text-gray-400">
                                   {product.shelfLife}
                                 </div>
                               )}</li>
-                    <li className="flex gap-1">
-                      • Product Packaging:
+                    <li className="flex gap-1 ">
+                      • Packaging:
                       {product.packaging &&
                         typeof product.packaging === 'object' &&
                         (product.packaging.pieces || product.packaging.cartons || product.packaging.pallets) ? (
@@ -75,7 +75,7 @@ const ProductModal = ({ product, onClose, buttonColor = 'blue' }) => {
                           <div className="text-md text-gray-400 italic">N/A</div>
                       )}
                     </li>
-                    <li className='flex gap-1'>• Product Origin: {product.origin && (
+                    <li className='flex gap-1'>• Origin: {product.origin && (
                                 <div className=" text-md text-gray-600 dark:text-gray-400">
                                   {product.origin}
                                 </div>
