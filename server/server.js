@@ -49,7 +49,10 @@ app.use(express.urlencoded({ extended: true }));
 // ======================
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/gluto-catalog';
+    const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/gluto-catalog';
+    if (!mongoURI || mongoURI === 'mongodb://localhost:27017/gluto-catalog') {
+      console.warn('⚠️  Using local MongoDB. Set MONGO_URI or MONGODB_URI for production.');
+    }
     await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -90,16 +93,7 @@ app.get('/api/health', (req, res) => {
 // ======================
 // Static File Serving (Production Only)
 // ======================
-if (process.env.NODE_ENV === 'production') {
-  // Adjusted path for Vercel deployment
-  const staticPath = path.join(__dirname, '../../dist');
-  app.use(express.static(staticPath));
-  
-  // Handle SPA routing (send all other requests to index.html)
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
-  });
-}
+// Note: Static file serving is handled by Vercel, not Express in serverless environment
 
 // ======================
 // Error Handling

@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "seed": "node server/data/seed.js",
-    "vercel-build": "npm run build",
+    "vercel-build": "vite build",
     "build:server": "echo 'No server build needed'",
     "start": "cross-env NODE_ENV=production node server/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon server/server.js"
