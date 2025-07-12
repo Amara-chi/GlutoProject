@@ -2,14 +2,30 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import { storage as cloudStorage } from '../lib/cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 const router = express.Router();
 
-const isVercel = process.env.VERCEL === '1';
+// Configure Cloudinary (different from frontend config)
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-if (isVercel) {
-  // Production - use Cloudinary
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (isProduction) {
+  // Cloudinary storage for production
+  const cloudStorage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+      folder: 'vercel-products',
+      allowed_formats: ['jpg', 'jpeg', 'png', 'webp']
+    }
+  });
+
   const upload = multer({ storage: cloudStorage });
   
   router.post('/', upload.single('image'), async (req, res) => {
@@ -27,7 +43,7 @@ if (isVercel) {
     }
   });
 } else {
-  // Local development
+  // Local filesystem storage for development
   const uploadDir = path.join(process.cwd(), 'public/uploads');
   
   if (!fs.existsSync(uploadDir)) {

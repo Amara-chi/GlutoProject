@@ -1,21 +1,11 @@
-import { v2 as cloudinary } from 'cloudinary';
-
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET, // Only for server-side
-  secure: true
-});
-
 export const uploadImage = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
+  formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
   try {
     const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
       {
         method: 'POST',
         body: formData
@@ -41,7 +31,7 @@ export const getOptimizedImageUrl = (url, width = 500, height = 500) => {
   
   // If local development URL
   if (url.startsWith('/uploads')) {
-    return process.env.NEXT_PUBLIC_API_BASE_URL + url;
+    return import.meta.env.VITE_API_BASE_URL + url;
   }
   
   // Return as-is if it's already a full URL
