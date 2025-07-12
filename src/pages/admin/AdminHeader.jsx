@@ -21,7 +21,7 @@ const AdminHeader = () => {
       <button
         onClick={toggleSidebar}
         className={`fixed z-50 h-10 w-7 flex items-center justify-center
-          bg-blue-700 dark:bg-blue-300 text-white dark:text-gray-200
+          bg-primary-700 dark:bg-primary-700 text-white dark:text-gray-200
           hover:text-gray-700 dark:hover:text-gray-300
           rounded-r-full shadow-md border-y border-r border-gray-200 dark:border-gray-700
           transition-all duration-300
@@ -54,7 +54,7 @@ const AdminHeader = () => {
                     to={item.path}
                     className={`flex items-center p-2 rounded-md
                       ${location.pathname === item.path
-                        ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
+                        ? 'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-200'
                         : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                       }`}
                   >

@@ -187,7 +187,7 @@ const AdminCategories = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -209,7 +209,7 @@ const AdminCategories = () => {
             </div>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+              className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center space-x-2"
             >
               <Plus className="h-4 w-4" />
               <span>Add Category</span>
@@ -225,7 +225,7 @@ const AdminCategories = () => {
             <div key={category._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
-                  <Tag className="h-5 w-5 text-blue-600" />
+                  <Tag className="h-5 w-5 text-primary-600" />
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                     {category.name}
                   </h3>
@@ -233,7 +233,7 @@ const AdminCategories = () => {
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleEdit(category)}
-                    className="p-2 text-blue-600 hover:text-blue-700 transition-colors"
+                    className="p-2 text-primary-600 hover:text-primary-700 transition-colors"
                   >
                     <Edit className="h-4 w-4" />
                   </button>
@@ -259,7 +259,7 @@ const AdminCategories = () => {
                           setActiveCategoryId(category._id);
                           setShowSubModal(true);
                         }}
-                        className="ml-auto p-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 hover:bg-blue-200"
+                        className="ml-auto p-1 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 hover:bg-primary-200"
                         title="Add Subcategory"
                       >
                         <Plus className="h-4 w-4" />
@@ -269,7 +269,7 @@ const AdminCategories = () => {
                     {category.subcategories.map((sub, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
+                        className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs rounded-full"
                       >
                         {sub}
                         <button
@@ -319,7 +319,7 @@ const AdminCategories = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
 
@@ -332,7 +332,7 @@ const AdminCategories = () => {
                     onChange={(e) => setFormData({...formData, description: e.target.value})}
                     required
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
 
@@ -345,7 +345,7 @@ const AdminCategories = () => {
                     value={formData.subcategories.join(', ')}
                     onChange={(e) => handleSubcategoryChange(e.target.value)}
                     placeholder="e.g., Rice, Beans, Fruits"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
 
@@ -362,7 +362,7 @@ const AdminCategories = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 transition-colors"
                   >
                     {editingCategory ? 'Update' : 'Create'}
                   </button>
@@ -433,7 +433,7 @@ const AdminCategories = () => {
                     value={newSubcategory}
                     onChange={(e) => setNewSubcategory(e.target.value)}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
 
@@ -451,7 +451,7 @@ const AdminCategories = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 ${
+                    className={`px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 ${
                       isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >

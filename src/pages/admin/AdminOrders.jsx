@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, Package, Calendar, User, Building } from 'lucide-react';
+import { Eye, Package, Calendar, User, Building, Trash2 } from 'lucide-react';
 import AdminHeader from './AdminHeader';
 
 const AdminOrders = () => {
@@ -7,6 +7,7 @@ const AdminOrders = () => {
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchOrders();
@@ -21,11 +22,45 @@ const AdminOrders = () => {
         }
       });
       const data = await response.json();
-      setOrders(data);
+      setOrders(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Error fetching orders:', error);
+      setError('Failed to load orders');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteOrder = async (orderId) => {
+    if (!window.confirm('Are you sure you want to delete this order? This action cannot be undone.')) {
+      return;
+    }
+  
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/orders/${orderId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to delete order');
+      }
+  
+      // Optimistic update - remove from UI immediately
+      setOrders(prevOrders => prevOrders.filter(order => order._id !== orderId));
+      
+      // Show success message
+      alert('Order deleted successfully');
+    } catch (error) {
+      console.error('Error deleting order:', error);
+      alert(error.message || 'Error deleting order');
+      
+      // Refresh orders if deletion failed
+      fetchOrders();
     }
   };
 
@@ -74,14 +109,21 @@ const AdminOrders = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-500">
+        {error}
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
       <AdminHeader />
       <div className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,7 +141,6 @@ const AdminOrders = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Orders Table */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -129,34 +170,42 @@ const AdminOrders = () => {
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                {orders.map((order) => (
-                  <tr key={order._id}>
+                {orders?.map((order) => (
+                  <tr key={order?._id || Math.random()}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                      #{order._id.slice(-6)}
+                      #{order?._id?.slice(-6) || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                      {order.customerInfo.fullName}
+                      {order.customerInfo?.fullName || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                      {order.customerInfo.companyName}
+                      {order.customerInfo?.companyName || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                      ${order.total.toFixed(2)}
+                      ${order.total?.toFixed(2) || '0.00'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(order.status)}`}>
-                        {order.status}
+                        {order.status || 'N/A'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                      {new Date(order.orderDate).toLocaleDateString()}
+                      {order.orderDate ? new Date(order.orderDate).toLocaleDateString() : 'N/A'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white flex space-x-2">
                       <button
                         onClick={() => handleViewOrder(order)}
-                        className="text-blue-600 hover:text-blue-700 transition-colors"
+                        className="text-primary-600 hover:text-primary-700 transition-colors"
+                        title="View Order"
                       >
                         <Eye className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteOrder(order._id)}
+                        className="text-red-600 hover:text-red-700 transition-colors"
+                        title="Delete Order"
+                      >
+                        <Trash2 className="h-4 w-4" />
                       </button>
                     </td>
                   </tr>
@@ -185,7 +234,7 @@ const AdminOrders = () => {
             <div className="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-lg">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                  Order Details - #{selectedOrder._id.slice(-6)}
+                  Order Details - #{selectedOrder._id?.slice(-6) || 'N/A'}
                 </h3>
                 <button
                   onClick={() => setShowModal(false)}
@@ -196,42 +245,39 @@ const AdminOrders = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                {/* Customer Information */}
                 <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                     <User className="h-5 w-5 mr-2" />
                     Customer Information
                   </h4>
                   <div className="space-y-2">
-                    <p><strong>Name:</strong> {selectedOrder.customerInfo.fullName}</p>
-                    <p><strong>Position:</strong> {selectedOrder.customerInfo.positionTitle}</p>
-                    <p><strong>Email:</strong> {selectedOrder.customerInfo.email}</p>
-                    <p><strong>Phone:</strong> {selectedOrder.customerInfo.phone}</p>
-                    <p><strong>Address:</strong> {selectedOrder.customerInfo.address}</p>
-                    <p><strong>Priority:</strong> {selectedOrder.customerInfo.priority}</p>
+                    <p><strong>Name:</strong> {selectedOrder.customerInfo?.fullName || 'N/A'}</p>
+                    <p><strong>Position:</strong> {selectedOrder.customerInfo?.positionTitle || 'N/A'}</p>
+                    <p><strong>Email:</strong> {selectedOrder.customerInfo?.email || 'N/A'}</p>
+                    <p><strong>Phone:</strong> {selectedOrder.customerInfo?.phone || 'N/A'}</p>
+                    <p><strong>Address:</strong> {selectedOrder.customerInfo?.address || 'N/A'}</p>
+                    <p><strong>Priority:</strong> {selectedOrder.customerInfo?.priority || 'N/A'}</p>
                   </div>
                 </div>
 
-                {/* Order Information */}
                 <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                     <Building className="h-5 w-5 mr-2" />
                     Order Information
                   </h4>
                   <div className="space-y-2">
-                    <p><strong>Company:</strong> {selectedOrder.customerInfo.companyName}</p>
-                    <p><strong>Order Date:</strong> {new Date(selectedOrder.orderDate).toLocaleDateString()}</p>
-                    <p><strong>Total:</strong> ${selectedOrder.total.toFixed(2)}</p>
+                    <p><strong>Company:</strong> {selectedOrder.customerInfo?.companyName || 'N/A'}</p>
+                    <p><strong>Order Date:</strong> {selectedOrder.orderDate ? new Date(selectedOrder.orderDate).toLocaleDateString() : 'N/A'}</p>
+                    <p><strong>Total:</strong> ${selectedOrder.total?.toFixed(2) || '0.00'}</p>
                     <p><strong>Status:</strong> 
                       <span className={`ml-2 px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(selectedOrder.status)}`}>
-                        {selectedOrder.status}
+                        {selectedOrder.status || 'N/A'}
                       </span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Order Items */}
               <div className="mb-6">
                 <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                   Order Items
@@ -255,19 +301,19 @@ const AdminOrders = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                      {selectedOrder.items.map((item, index) => (
+                      {selectedOrder.items?.map((item, index) => (
                         <tr key={index}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                            {item.product.name}
+                            {item?.product?.name || 'Unnamed Product'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                            {item.quantity}
+                            {item?.quantity || 0}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                            ${item.price.toFixed(2)}
+                            ${item?.price?.toFixed(2) || '0.00'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                            ${(item.quantity * item.price).toFixed(2)}
+                            ${((item?.quantity || 0) * (item?.price || 0)).toFixed(2)}
                           </td>
                         </tr>
                       ))}
@@ -276,16 +322,15 @@ const AdminOrders = () => {
                 </div>
               </div>
 
-              {/* Status Update */}
               <div className="flex justify-between items-center">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Update Status
                   </label>
                   <select
-                    value={selectedOrder.status}
+                    value={selectedOrder.status || 'pending'}
                     onChange={(e) => handleStatusUpdate(selectedOrder._id, e.target.value)}
-                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   >
                     <option value="pending">Pending</option>
                     <option value="processing">Processing</option>

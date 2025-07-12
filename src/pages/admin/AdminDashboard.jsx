@@ -57,7 +57,7 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -100,7 +100,7 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center">
-              <Package className="h-8 w-8 text-blue-600" />
+              <Package className="h-8 w-8 text-primary-600" />
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Products</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalProducts}</p>
@@ -110,7 +110,7 @@ const AdminDashboard = () => {
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center">
-              <TrendingUp className="h-8 w-8 text-green-600" />
+              <TrendingUp className="h-8 w-8 text-primary-600" />
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Categories</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalCategories}</p>
@@ -120,7 +120,7 @@ const AdminDashboard = () => {
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center">
-              <ShoppingCart className="h-8 w-8 text-purple-600" />
+              <ShoppingCart className="h-8 w-8 text-primary-600" />
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Orders</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalOrders}</p>
@@ -144,7 +144,7 @@ const AdminDashboard = () => {
                   Add, edit, or remove products from the catalog
                 </p>
               </div>
-              <Package className="h-8 w-8 text-blue-600" />
+              <Package className="h-8 w-8 text-primary-600" />
             </div>
           </Link>
 
@@ -161,7 +161,7 @@ const AdminDashboard = () => {
                   Organize products into categories
                 </p>
               </div>
-              <TrendingUp className="h-8 w-8 text-green-600" />
+              <TrendingUp className="h-8 w-8 text-primary-600" />
             </div>
           </Link>
 
@@ -178,7 +178,7 @@ const AdminDashboard = () => {
                   Review and manage customer orders
                 </p>
               </div>
-              <ShoppingCart className="h-8 w-8 text-purple-600" />
+              <ShoppingCart className="h-8 w-8 text-primary-600" />
             </div>
           </Link>
         </div>
