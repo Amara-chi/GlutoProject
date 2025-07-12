@@ -54,7 +54,7 @@ const AdminLogin = () => {
         <div className="text-center">
           <div className="flex justify-center">
           <img 
-                src="../src/assets/Gluto Logo w stoke.png" 
+                src="/assets/Gluto Logo w stoke.png" 
                 alt="GLUTO International Logo" 
                 className="h-10 w-auto hover:scale-105 transition-transform"
               />

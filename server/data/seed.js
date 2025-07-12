@@ -152,7 +152,11 @@ const sampleProducts = [
 const seedDatabase = async () => {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGO_URI);
+    const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI;
+    if (!mongoURI) {
+      throw new Error('MongoDB URI not found in environment variables');
+    }
+    await mongoose.connect(mongoURI);
     console.log('Connected to MongoDB');
 
     // Clear existing data
