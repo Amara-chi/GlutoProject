@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "start": "node server/server.js",
     "seed": "node server/data/seed.js",
-    "vercel-build": "npm run build && npm run build:server"
+    "vercel-build": "npm run build && npm run build:server",
+    "build:server": "cd server && tsc --project tsconfig.json"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
