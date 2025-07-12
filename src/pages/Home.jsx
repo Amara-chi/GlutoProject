@@ -11,17 +11,17 @@ const Home = () => {
     {
       title: "Premium Agricultural Products",
       subtitle: "Sourcing the finest quality produce from trusted farmers worldwide",
-       image: "../src/assets/freshly-ripe-vegetables-wooden-crate.jpg",
+       image: "/assets/freshly-ripe-vegetables-wooden-crate.jpg",
     },
     {
       title: "Global Distribution Network",
       subtitle: "Efficient logistics for seamless international deliveries",
-       image: "../src/assets/biologist-forest.jpg",
+       image: "/assets/biologist-forest.jpg",
     },
     {
       title: "Sustainable Farming Partners",
       subtitle: "Committed to ethical and environmentally friendly practices",
-     image: "../src/assets/warehouse-employees.jpg"
+     image: "/assets/warehouse-employees.jpg"
     }
   ];
 

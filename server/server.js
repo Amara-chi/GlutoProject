@@ -16,87 +16,107 @@ import orderRoutes from './routes/orders.js';
 import uploadRoutes from './routes/upload.js';
 import contactRoutes from './routes/contact.js';
 
-
+// Load environment variables
 dotenv.config();
 
+// Configure __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Security middleware
+// ======================
+// Middleware
+// ======================
 app.use(helmet());
 app.use(cors());
-app.use(morgan('combined'));
+app.use(morgan('dev')); // Use 'dev' format for better readability in logs
 
-// Rate limiting
+// Rate limiting (applied only to API routes)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later'
 });
 app.use('/api/', limiter);
 
-// Body parsing middleware
+// Body parsing
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB connection with better error handling
+// ======================
+// Database Connection
+// ======================
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/gluto-catalog';
-    await mongoose.connect(mongoURI);
-    console.log('MongoDB connected successfully');
+    const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/gluto-catalog';
+    if (!mongoURI || mongoURI === 'mongodb://localhost:27017/gluto-catalog') {
+      console.warn('⚠️  Using local MongoDB. Set MONGO_URI or MONGODB_URI for production.');
+    }
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('✅ MongoDB connected successfully');
   } catch (err) {
-    console.error('MongoDB connection error:', err);
-    // Don't exit the process, just log the error
-    console.log('Running without database connection - some features may not work');
+    console.error('❌ MongoDB connection error:', err.message);
+    // Continue running without DB connection (API will still work, but DB features will fail)
   }
 };
-
 connectDB();
 
-// API routes
+// ======================
+// API Routes
+// ======================
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/contact', contactRoutes);
-// Image upload and static file serving
 app.use('/api/upload', uploadRoutes);
+
+// Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-// Health check endpoint
+// ======================
+// Health Check Endpoint
+// ======================
 app.get('/api/health', (req, res) => {
   res.json({ 
-    status: 'OK', 
+    status: 'OK',
     timestamp: new Date().toISOString(),
-    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || 'development'
   });
 });
 
-// Serve static files from React app
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../dist')));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-  });
-}
+// ======================
+// Static File Serving (Production Only)
+// ======================
+// Note: Static file serving is handled by Vercel, not Express in serverless environment
 
-// Error handling middleware
+// ======================
+// Error Handling
+// ======================
 app.use((err, req, res, next) => {
-  console.error('Error details:', err);
+  console.error('🔥 Error:', err.stack);
   res.status(500).json({ 
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
+    message: 'Internal Server Error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`MongoDB URI: ${process.env.MONGO_URI ? 'Set' : 'Not set'}`);
-  console.log(`JWT Secret: ${process.env.JWT_SECRET ? 'Set' : 'Not set'}`);
-});
+// ======================
+// Server Start
+// ======================
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log('\n=== Server Started ===');
+//   console.log(`🚀 Environment: ${process.env.NODE_ENV || 'development'}`);
+//   console.log(`🔗 Base URL: http://localhost:${PORT}`);
+//   console.log(`🗄️  MongoDB: ${process.env.MONGO_URI ? 'Configured' : 'Not configured'}`);
+//   console.log(`🛡️  JWT Secret: ${process.env.JWT_SECRET ? 'Set' : 'Not set'}\n`);
+// });
+
+// Export for Vercel serverless function
+export default app;

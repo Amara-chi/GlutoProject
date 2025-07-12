@@ -1,7 +1,14 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { ShoppingCart, X } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
-const ProductModal = ({ product, onClose }) => {
+const ProductModal = ({ product, onClose, buttonColor = 'blue' }) => {
+   const { addToCart } = useCart();
+  
+    const handleAddToCart = (e) => {
+      e.stopPropagation();
+      addToCart(product);
+    };
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -41,16 +48,35 @@ const ProductModal = ({ product, onClose }) => {
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Details:</h4>
                   <ul className="text-gray-600 dark:text-gray-300 space-y-1">
                     <li>• Category: {product.category?.name || 'N/A'}</li>
-                    <li>• Stock: {product.stock || 'N/A'}</li>
-                    <li>• SKU: {product.sku || 'N/A'}</li>
+                    <li className='flex gap-1'>• Product Weight: {product.weight && (
+                                <div className=" text-md text-gray-600 dark:text-gray-400">
+                                  {product.weight}
+                                </div>
+                              )}</li>
+                    <li className='flex gap-1'>• Product Leadtime: {product.leadTime && (
+                                <div className=" text-md text-gray-600 dark:text-gray-400">
+                                  {product.leadTime}
+                                </div>
+                              )}</li>
+                    <li className='flex gap-1'>• Product Shelflife: {product.shelfLife && (
+                                <div className=" text-md text-gray-600 dark:text-gray-400">
+                                  {product.shelfLife}
+                                </div>
+                              )}</li>
                   </ul>
                 </div>
                 
                 <button
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg transition-colors"
-                >
-                  Add to Cart
-                </button>
+                            onClick={handleAddToCart}
+                            className={`${
+                              buttonColor === 'yellow' 
+                                ? 'bg-yellow-500 hover:bg-yellow-600' 
+                                : 'bg-blue-600 hover:bg-blue-700'
+                            } text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200`}
+                          >
+                            <ShoppingCart className="h-4 w-4" />
+                            <span>Add to Cart</span>
+                          </button>
               </div>
             </div>
           </div>

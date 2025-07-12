@@ -5,29 +5,34 @@ import fs from 'fs';
 
 const router = express.Router();
 
-// Create uploads directory if it doesn't exist
-const uploadDir = 'uploads/';
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+const isProduction = process.env.NODE_ENV === 'production';
 
-// Multer storage config
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, Date.now() + ext);
-  }
-});
+if (isProduction) {
+  // Dummy upload route for production
+  router.post('/', (req, res) => {
+    res.status(200).json({ url: '/uploads/placeholder.jpg' });
+  });
+} else {
+  // Real upload route for local dev
+  const uploadDir = 'uploads/';
+  if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
-const upload = multer({ storage });
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadDir),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname);
+      cb(null, Date.now() + ext);
+    }
+  });
 
-// POST /api/upload
-router.post('/', upload.single('image'), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  const upload = multer({ storage });
 
-  const imageUrl = `/uploads/${req.file.filename}`;
-  res.status(200).json({ url: imageUrl });
-});
+  router.post('/', upload.single('image'), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+
+    const imageUrl = `/uploads/${req.file.filename}`;
+    res.status(200).json({ url: imageUrl });
+  });
+}
 
 export default router;

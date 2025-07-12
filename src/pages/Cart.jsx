@@ -33,7 +33,7 @@ const Cart = () => {
             </p>
             <a
               href="/catalog"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
+              className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
             >
               Browse Products
             </a>
@@ -136,7 +136,7 @@ const Cart = () => {
               </div>
               <button
                 onClick={() => setIsOrderModalOpen(true)}
-                className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
+                className="w-full mt-6 bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
               >
                 Place Order
               </button>

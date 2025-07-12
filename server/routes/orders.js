@@ -150,6 +150,25 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
+// Delete order (admin only)
+router.delete('/:id', authenticateToken, async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id);
+    
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.json({ message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error('Delete order error:', error);
+    res.status(500).json({ 
+      message: 'Failed to delete order',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
 // Update order status (admin only)
 router.put('/:id/status', authenticateToken, async (req, res) => {
   try {
