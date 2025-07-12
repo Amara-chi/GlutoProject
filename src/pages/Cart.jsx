@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import OrderModal from '../components/OrderModal';
+import { getOptimizedImageUrl } from '../utils/cloudinary';
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal } = useCart();
@@ -68,7 +69,7 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <div key={item._id} className="p-6 flex items-center space-x-4">
                     <img
-                      src={item.image}
+                      src={getOptimizedImageUrl(item.image, 100, 100)}
                       alt={item.name}
                       className="h-16 w-16 object-cover rounded-lg"
                     />

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ShoppingCart, Package, Clock, Calendar } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { getOptimizedImageUrl } from '../utils/cloudinary';
+
 
 const ProductCard = ({ product, onClick, buttonColor = 'blue' }) => {
   const { addToCart } = useCart();
@@ -16,11 +18,11 @@ const ProductCard = ({ product, onClick, buttonColor = 'blue' }) => {
       onClick={onClick}
     >
       <div className="relative">
-        <img 
-          src={product.image} 
-          alt={product.name}
-          className="w-full h-48 object-cover"
-        />
+      <img
+        src={getOptimizedImageUrl(product.image, 500, 500)}
+        alt={product.name}
+        className="w-full h-48 object-cover"
+      />
         <div className="absolute top-2 right-2 bg-white dark:bg-gray-700 rounded-full px-2 py-1 text-xs font-semibold">
           {product.category?.name}
         </div>

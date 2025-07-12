@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Search, Package } from 'lucide-react';
 import AdminHeader from './AdminHeader';
+import { getOptimizedImageUrl } from '../utils/cloudinary';
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
@@ -404,17 +405,9 @@ const AdminProducts = () => {
                       const file = e.target.files[0];
                       if (!file) return;
 
-                      const formDataImage = new FormData();
-                      formDataImage.append('image', file);
-
                       try {
-                        const res = await fetch('/api/upload', {
-                          method: 'POST',
-                          body: formDataImage
-                        });
-
-                        const data = await res.json();
-                        setFormData((prev) => ({ ...prev, image: data.url }));
+                        const imageUrl = await uploadImage(file);
+                        setFormData((prev) => ({ ...prev, image: imageUrl }));
                       } catch (err) {
                         console.error('Image upload failed', err);
                         alert('Image upload failed');
@@ -424,7 +417,7 @@ const AdminProducts = () => {
                   />
                   {formData.image && (
                     <img
-                      src={formData.image}
+                      src={getOptimizedImageUrl(formData.image, 300, 300)}
                       alt="Preview"
                       className="mt-2 h-32 rounded-md object-cover"
                     />
