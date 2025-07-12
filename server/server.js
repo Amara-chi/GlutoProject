@@ -115,14 +115,14 @@ app.use((err, req, res, next) => {
 // ======================
 // Server Start
 // ======================
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log('\n=== Server Started ===');
-  console.log(`🚀 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔗 Base URL: http://localhost:${PORT}`);
-  console.log(`🗄️  MongoDB: ${process.env.MONGO_URI ? 'Configured' : 'Not configured'}`);
-  console.log(`🛡️  JWT Secret: ${process.env.JWT_SECRET ? 'Set' : 'Not set'}\n`);
-});
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log('\n=== Server Started ===');
+//   console.log(`🚀 Environment: ${process.env.NODE_ENV || 'development'}`);
+//   console.log(`🔗 Base URL: http://localhost:${PORT}`);
+//   console.log(`🗄️  MongoDB: ${process.env.MONGO_URI ? 'Configured' : 'Not configured'}`);
+//   console.log(`🛡️  JWT Secret: ${process.env.JWT_SECRET ? 'Set' : 'Not set'}\n`);
+// });
 
 // Export for Vercel serverless function
 export default app;

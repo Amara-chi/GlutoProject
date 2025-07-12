@@ -1,3 +1,12 @@
-// This simply imports and exports your Express app
 import app from '../server/server.js';
-export default app;
+import serverless from 'serverless-http';
+
+const handler = serverless(app);
+
+export const config = {
+  api: {
+    bodyParser: false, // optional: helps with file uploads or raw body
+  },
+};
+
+export default handler;
