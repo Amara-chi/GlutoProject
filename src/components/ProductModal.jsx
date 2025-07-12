@@ -63,6 +63,21 @@ const ProductModal = ({ product, onClose, buttonColor = 'blue' }) => {
                                   {product.shelfLife}
                                 </div>
                               )}</li>
+                    <li className='flex gap-1'>• Product Packaging: {product.packaging && (
+                                <div className=" text-md text-gray-600 dark:text-gray-400">
+                                  {product.packaging}
+                                </div>
+                              )}</li>
+                    <li className='flex gap-1'>• Product Origin: {product.origin && (
+                                <div className=" text-md text-gray-600 dark:text-gray-400">
+                                  {product.origin}
+                                </div>
+                              )}</li>
+                    <li className='flex gap-1'>• Product Ean: {product.ean && (
+                                <div className=" text-md text-gray-600 dark:text-gray-400">
+                                  {product.ean}
+                                </div>
+                              )}</li>
                   </ul>
                 </div>
                 
