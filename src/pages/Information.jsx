@@ -83,7 +83,7 @@ const Information = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`mb-12 ${animated ? 'animate-fadeIn' : ''}`}>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            About GLUTO International
+            About Gluto International
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300">
             Your trusted global partner in food distribution and agricultural commodities
@@ -97,13 +97,13 @@ const Information = () => {
           </h2>
           <div className="space-y-6">
             <p className="text-gray-600 dark:text-gray-300">
-              Founded in 2010, GLUTO International Limited has grown from a regional food distributor to a global leader in agricultural commodity trading. Headquartered in London with regional offices in Lagos, Dubai, and Singapore, we bridge the gap between producers and markets across continents.
+              Founded in 2019, Gluto International Limited has grown from a regional food distributor to a global leader in agricultural commodity trading. Headquartered in London with regional offices in Lagos, Dubai, and Singapore, we bridge the gap between producers and markets across continents.
             </p>
             <p className="text-gray-600 dark:text-gray-300">
               Our mission is to deliver quality food products efficiently while maintaining the highest standards of integrity and sustainability. We've built our reputation on transparency, reliability, and exceptional service, handling over 250,000 metric tons of products annually.
             </p>
             <p className="text-gray-600 dark:text-gray-300">
-              GLUTO International is more than a distributor - we're a solutions provider. Our team of 150+ professionals includes food scientists, logistics experts, and trade specialists who work together to solve complex supply chain challenges for our clients.
+              Gluto International is more than a distributor - we're a solutions provider. Our team of 150+ professionals includes food scientists, logistics experts, and trade specialists who work together to solve complex supply chain challenges for our clients.
             </p>
           </div>
         </div>
@@ -352,7 +352,7 @@ const Information = () => {
           <h2 className="text-3xl font-bold mb-6">What Our Partners Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-primary-700 p-6 rounded-lg">
-              <p className="italic mb-4">"GLUTO International has been our trusted supplier for 5 years. Their quality consistency and reliable delivery are unmatched in the industry."</p>
+              <p className="italic mb-4">"Gluto International has been our trusted supplier for 5 years. Their quality consistency and reliable delivery are unmatched in the industry."</p>
               <p className="font-semibold">- James Wilson, Procurement Director, UK Retail Chain</p>
             </div>
             <div className="bg-primary-700 p-6 rounded-lg">
