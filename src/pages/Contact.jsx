@@ -72,7 +72,7 @@ const Contact = () => {
                   <Phone className="h-6 w-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Phone</p>
-                    <p className="text-gray-600 dark:text-gray-400">+1 (555) 123-4567</p>
+                    <p className="text-gray-600 dark:text-gray-400">+234 80 867 782 87</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -80,9 +80,9 @@ const Contact = () => {
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Address</p>
                     <p className="text-gray-600 dark:text-gray-400">
-                      123 Business Street<br />
-                      International Trade Center<br />
-                      City, Country 12345
+                      10, Bristol Road, <br /> 
+GRA, Apapa, Lagos State,<br />
+Nigeria
                     </p>
                   </div>
                 </div>
@@ -102,7 +102,7 @@ const Contact = () => {
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                Why Choose GLUTO International?
+                Why Choose Gluto International Limited?
               </h3>
               <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                 <li>• Global distribution network</li>
