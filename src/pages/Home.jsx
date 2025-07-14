@@ -194,10 +194,10 @@ const Home = () => {
           >
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-                About GLUTO International
+                About Gluto International Limited
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
-                Founded in 2010, GLUTO International has grown from a small regional supplier to a global leader in agricultural product distribution. Our mission is to bridge the gap between quality producers and international markets.
+                Founded in 2019, Gluto International Limited has grown from a small regional supplier to a global leader in agricultural product distribution. Our mission is to bridge the gap between quality producers and international markets.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
                 With warehouses in 3 continents and partnerships with over 200 farms worldwide, we ensure that our customers receive the freshest products with the shortest possible supply chain.
@@ -267,7 +267,7 @@ const Home = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Why Choose GLUTO International?
+              Why Choose Gluto International Limited?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               We are committed to providing exceptional service and quality products to our global partners.
