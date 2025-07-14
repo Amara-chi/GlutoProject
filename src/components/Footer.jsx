@@ -10,9 +10,13 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 text-primary-400">GLUTO International</h3>
+            <h3 className="text-xl font-bold mb-4 text-primary-400">Gluto International Limited</h3>
             <p className="mb-4 text-gray-300">
-              Your trusted partner in global food distribution and agricultural products.
+              Gluto International Limited is an Agricultural and livestock 
+rearing company and also carries out export and wholesale in 
+the FMCG Industry worldwide. We are proud to make distributions 
+to over 60 Countries and also represent many top agricultural 
+producers and manufacturers.
             </p>
             <div className="flex space-x-4">
               {/* Social media icons would go here */}
@@ -53,7 +57,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-primary-400 mt-0.5" />
-                <span className="text-gray-300">123 Business Street, International Trade Center, City, Country</span>
+                <span className="text-gray-300">10, Bristol Road, GRA, Apapa, Lagos State, Nigeria</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary-400" />
@@ -61,7 +65,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary-400" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">+234 80 867 782 87</span>
               </div>
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-primary-400 mt-0.5" />
@@ -72,7 +76,7 @@ const Footer = () => {
         </div>
 
         <div className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-700'} pt-6 flex flex-col md:flex-row justify-between items-center`}>
-          <p className="text-gray-300">© {new Date().getFullYear()} GLUTO International. All rights reserved.</p>
+          <p className="text-gray-300">© {new Date().getFullYear()} Gluto International Limited. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-sm hover:text-primary-400 transition-colors text-gray-300">Privacy Policy</a>
             <a href="#" className="text-sm hover:text-primary-400 transition-colors text-gray-300">Terms of Service</a>
