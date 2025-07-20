@@ -373,7 +373,7 @@ const Home = () => {
               {
                 title: 'Agri Fresh Products',
                 description: 'Rice, beans, fruits, seeds, and nuts',
-                image: 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg'
+                image: '../../../PicturesNew/Agri Fresh Products.jpg'
               },
               {
                 title: 'Food & Beverage',
