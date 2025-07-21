@@ -218,7 +218,7 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl font-bold text-primary-700 dark:text-primary-400 mb-2">15+</h3>
+                <h3 className="text-2xl font-bold text-primary-700 dark:text-primary-400 mb-2">6+</h3>
                 <p className="text-gray-600 dark:text-gray-300">Years in Business</p>
               </motion.div>
               <motion.div 
