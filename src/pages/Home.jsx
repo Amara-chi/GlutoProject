@@ -373,32 +373,32 @@ const Home = () => {
               {
                 title: 'Agri Fresh Products',
                 description: 'Rice, beans, fruits, seeds, and nuts',
-                image: 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg'
+                image: '../src/assets/Agri Fresh Products.jpg'
               },
               {
                 title: 'Food & Beverage',
                 description: 'Snacks, drinks, and toiletries',
-                image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg'
+                image: '../src/assests/Food & Beverage.jpeg'
               },
               {
                 title: 'Meat & Poultry',
                 description: 'Eggs, fish, and beef products',
-                image: 'https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg'
+                image: '../src/assets/Meat & Poultry.jpg'             
               },
               {
                 title: 'Processed African Foods',
                 description: 'Stock fish, egusi, and poundo yam',
-                image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg'
+                image: '../src/assets/Processed African food stuff.jpeg'
               },
               {
                 title: 'Non-Food Products',
                 description: 'Organic soaps, creams, and syrups',
-                image: 'https://images.pexels.com/photos/4465831/pexels-photo-4465831.jpeg'
+                image: '../src/assets/non food products.jpg'
               },
               {
                 title: 'Agro-nutrition',
                 description: 'Fertilizers and bio-stimulants',
-                image: 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg'
+                image: '../src/assets/'
               }
             ].map((category, index) => (
               <motion.div 
@@ -425,7 +425,7 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
-
+          
           <div className="text-center mt-12">
             <Link 
               to="/catalog"
