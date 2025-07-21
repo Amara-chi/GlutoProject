@@ -378,7 +378,7 @@ const Home = () => {
               {
                 title: 'Food & Beverage',
                 description: 'Snacks, drinks, and toiletries',
-                image: '/assests/Food & Beverage.jpeg'
+                image: '/assets/Food & Beverage.jpeg'
               },
               {
                 title: 'Meat & Poultry',
