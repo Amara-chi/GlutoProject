@@ -97,7 +97,7 @@ const Information = () => {
           </h2>
           <div className="space-y-6">
             <p className="text-gray-600 dark:text-gray-300">
-              Founded in 2019, Gluto International Limited has grown from a regional food distributor to a global leader in agricultural commodity trading. Headquartered in London with regional offices in Lagos, Dubai, and Singapore, we bridge the gap between producers and markets across continents.
+              Founded in 2019, Gluto International Limited has grown from a regional food distributor to a global leader in agricultural commodity trading. Headquartered in Lagos, we bridge the gap between producers and markets across continents.
             </p>
             <p className="text-gray-600 dark:text-gray-300">
               Our mission is to deliver quality food products efficiently while maintaining the highest standards of integrity and sustainability. We've built our reputation on transparency, reliability, and exceptional service, handling over 250,000 metric tons of products annually.
