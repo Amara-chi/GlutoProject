@@ -13,6 +13,11 @@
       }
     }
   ],
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs24.x"
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
